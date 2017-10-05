@@ -54,11 +54,15 @@ public class QueryUtils {
                 JSONObject bookInfo = bookObject.getJSONObject("volumeInfo");
 
                 String title = bookInfo.getString("title");
-                JSONArray authorsArray = bookInfo.getJSONArray("authors");
-                String authors = formatListOfAuthors(authorsArray);
 
-                Book book = new Book(authors, title);
-                books.add(book);
+                if (bookInfo.has("authors")) {
+                    JSONArray authorsArray = bookInfo.getJSONArray("authors");
+
+                    String authors = formatListOfAuthors(authorsArray);
+
+                    Book book = new Book(authors, title);
+                    books.add(book);
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();

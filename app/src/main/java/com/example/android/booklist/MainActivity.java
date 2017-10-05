@@ -70,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean isInternetConnectionAvailable(){
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        return activeNetwork.isConnectedOrConnecting();
+        boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        return isConnected;
     }
 
     private void updateUi(List<Book> books){
